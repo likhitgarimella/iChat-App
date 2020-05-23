@@ -7,12 +7,14 @@
 //
 
 import UIKit
+import Firebase
 
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // nav bar button
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleLogout))
         
     }
@@ -38,4 +40,4 @@ extension UIViewController {
         view.endEditing(true)
     }
     
-}   // #42
+}   // #44
