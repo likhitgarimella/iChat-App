@@ -17,6 +17,7 @@ class LoginController: UIViewController {
     let emailTextField = UITextField()
     let emailSeparatorView = UIView()
     let passwordTextField = UITextField()
+    let profileImageView = UIImageView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,10 +25,12 @@ class LoginController: UIViewController {
         view.backgroundColor = UIColor(red: 61/255, green: 91/255, blue: 151/255, alpha: 1)
         view.addSubview(inputsContainerView)
         view.addSubview(loginRegisterButton)
+        view.addSubview(profileImageView)
         
         hideKeyboardWhenTappedAround()
         setupInputsContainerView()
         setupLoginRegisterButton()
+        setupProfileImageView()
         
     }
     
@@ -108,6 +111,21 @@ class LoginController: UIViewController {
         
     }
     
+    func setupProfileImageView() {
+        
+        // profileImageView properties
+        profileImageView.image = UIImage(named: "sample")
+        profileImageView.translatesAutoresizingMaskIntoConstraints = false
+        profileImageView.contentMode = .scaleAspectFill
+        
+        // Need x, y, width, height constraints
+        profileImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        profileImageView.bottomAnchor.constraint(equalTo: inputsContainerView.topAnchor, constant: -24).isActive = true
+        profileImageView.widthAnchor.constraint(equalToConstant: 276.5).isActive = true
+        profileImageView.heightAnchor.constraint(equalToConstant: 202.5).isActive = true
+        
+    }
+    
     func setupLoginRegisterButton() {
         
         loginRegisterButton.backgroundColor = UIColor(red: 80/255, green: 101/255, blue: 161/255, alpha: 1)
@@ -126,4 +144,4 @@ class LoginController: UIViewController {
         
     }
 
-}   // #130
+}   // #148
