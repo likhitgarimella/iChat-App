@@ -115,6 +115,8 @@ class LoginController: UIViewController {
         
         // profileImageView properties
         profileImageView.image = UIImage(named: "sample")
+        profileImageView.layer.masksToBounds = true
+        profileImageView.layer.cornerRadius = 6
         profileImageView.translatesAutoresizingMaskIntoConstraints = false
         profileImageView.contentMode = .scaleAspectFill
         
