@@ -17,7 +17,21 @@ class MessagesController: UITableViewController {
         // nav bar button
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleLogout))
         
+        let image = UIImage(named: "pen")
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(handleNewMessage))
+        
         checkIfUserIsLoggedIn()
+        
+    }
+    
+    @objc func handleNewMessage() {
+        
+        let newMessageController = NewMessageController()
+        let navController = UINavigationController(rootViewController: newMessageController)
+        // presentation style
+        navController.modalPresentationStyle = .fullScreen
+        present(navController, animated: true, completion: nil)
+        
         
     }
     
@@ -70,4 +84,4 @@ extension UIViewController {
         view.endEditing(true)
     }
     
-}   // #74
+}   // #88
