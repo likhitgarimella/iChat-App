@@ -34,6 +34,8 @@ class ViewController: UIViewController {
         }
         
         let loginController = LoginController()
+        // presentation style
+        loginController.modalPresentationStyle = .fullScreen
         present(loginController, animated: true, completion: nil)
         
     }
@@ -52,4 +54,4 @@ extension UIViewController {
         view.endEditing(true)
     }
     
-}   // #56
+}   // #58

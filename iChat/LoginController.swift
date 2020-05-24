@@ -204,7 +204,37 @@ class LoginController: UIViewController {
         loginRegisterButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
         
         // Action for register button
-        loginRegisterButton.addTarget(self, action: #selector(handleRegister), for: .touchUpInside)
+        loginRegisterButton.addTarget(self, action: #selector(handleLoginRegister), for: .touchUpInside)
+        
+    }
+    
+    @objc func handleLoginRegister() {
+        
+        if loginRegisterSegmentedControl.selectedSegmentIndex == 0 {
+            handleLogin()
+        } else {
+            handleRegister()
+        }
+        
+    }
+    
+    @objc func handleLogin() {
+        
+        guard let email = emailTextField.text, let password = passwordTextField.text else {
+            print("Invalid Form Input")
+            return
+        }
+        
+        Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
+            
+            if error != nil {
+                print(error!)
+                return
+            }
+            // Successfully logged in user
+            self.dismiss(animated: true, completion: nil)
+            
+        }
         
     }
     
@@ -226,7 +256,7 @@ class LoginController: UIViewController {
                 return
             }
             
-            // Successfully authenticated user
+            // Successfully registered user
             let ref = Database.database().reference()
             let usersReference = ref.child("users").child(uid)
             let values = ["name": name, "email": email]
@@ -246,4 +276,4 @@ class LoginController: UIViewController {
         
     }
 
-}   // #250
+}   // #280
