@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  MessagesController.swift
 //  iChat
 //
 //  Created by Likhit Garimella on 23/05/20.
@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class ViewController: UIViewController {
+class MessagesController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,10 +17,26 @@ class ViewController: UIViewController {
         // nav bar button
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleLogout))
         
+        checkIfUserIsLoggedIn()
+        
+    }
+    
+    func checkIfUserIsLoggedIn() {
+        
         // user is not logged in
         if Auth.auth().currentUser?.uid == nil {
             // handleLogout()
             self.perform(#selector(handleLogout), with: nil, afterDelay: 0)
+        } else {
+            // if user logged in
+            let uid = Auth.auth().currentUser?.uid
+            Database.database().reference().child("users").child(uid!).observeSingleEvent(of: .value, with: {(snapshot) in
+                
+                if let dictionary = snapshot.value as? [String : AnyObject] {
+                    self.navigationItem.title = dictionary["name"] as? String
+                }
+                
+            }, withCancel: nil)
         }
         
     }
@@ -54,4 +70,4 @@ extension UIViewController {
         view.endEditing(true)
     }
     
-}   // #58
+}   // #74
